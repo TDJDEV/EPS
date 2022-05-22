@@ -1,3 +1,5 @@
+import { Router } from "express";
+
 const default_route = {
   method: 'get',
   path: '/',
@@ -7,7 +9,7 @@ const default_route = {
 }
 
 function new_route(router, route_data){
-  console.log(route_data)
+  console.log('new route =>',route_data)
   router[route_data.method](
     route_data.path,
     route_data.callback
@@ -15,4 +17,5 @@ function new_route(router, route_data){
   return router
 }
 
-module.exports = routes => (routes.length || routes.push(default_route), routes).reduce(new_route, require('express').Router());
+const routes = routes => (routes.length || routes.push(default_route), routes).reduce(new_route, Router());
+export { routes }

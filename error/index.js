@@ -1,6 +1,6 @@
-const createError = require('http-errors');
+import createError from 'http-errors';
 
-module.exports = app => {
+function error() {
 
     return [
         function(req, res, next) {
@@ -17,3 +17,5 @@ module.exports = app => {
         }
       ]
 }
+
+export { error }

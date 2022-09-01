@@ -4,7 +4,7 @@ const default_route = {
   method: 'get',
   path: '/',
   callback(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'EPS' });
   }
 }
 

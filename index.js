@@ -26,7 +26,7 @@ const EPS = {
   run() {
     Object
       .entries(www(server_data))
-      .forEach( function([key,val]) { server_data[key] = val })
+      .forEach( ([key,val]) => { this[key] = val })
   },
 }
 export { EPS }

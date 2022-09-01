@@ -13,7 +13,7 @@ function www (params = {}) {
      * Get port from environment and store in Express.
      */
   
-    const port = normalizePort(process.env.PORT || '3000');
+    const port = normalizePort(process.env.PORT || params.port || '3000');
     app.set('port', port);
   
     /*
@@ -88,7 +88,7 @@ function www (params = {}) {
       const bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-      debug('polyngo:server')('Listening on ' + bind);
+      debug(`${params.appName}:server`)('Listening on ' + bind);
     }
     
     return { port }

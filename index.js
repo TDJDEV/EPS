@@ -23,7 +23,7 @@ class EPS {
   }
 
   param (...params) {
-    const addQueryHandler = (setting) => { setting.length && (this.#serverDataQueryHandler.push(setting))}
+    const addQueryHandler = (setting) => { setting.length && (this.#serverData.queryHandler.push(setting))}
     Array.isArray(params[0]) ? params.forEach(addQueryHandler) : addQueryHandler(params)
   }
 

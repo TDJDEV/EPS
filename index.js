@@ -39,7 +39,7 @@ class EPS {
   webSocket(WS){ this.#serverData.webSocket = WS }
 
   run() { Object.entries(www(this.#serverData)).forEach( ([key,val]) => { this[key] = val }) }
-  run() { Object.entries(www({appName:"EPS",routes:['demo'],accesses:[],settings:[],middlewares:[],queryHandlers:[]})) }
+  demo() { Object.entries(www({appName:"EPS",routes:['demo'],accesses:[],settings:[],middlewares:[],queryHandlers:[]})) }
 
 }
 export { EPS }

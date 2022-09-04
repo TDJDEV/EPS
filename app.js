@@ -6,7 +6,7 @@ import { error } from './error/index.js'
 import { fileURLToPath } from 'url';
 
 function routeMap(route){
-  if(route){
+  if(typeof route === "object"){
     !route.method && (route.method = "get");
     !(route.callback instanceof Function) && (route.callback = express.static(route.callback));
   }

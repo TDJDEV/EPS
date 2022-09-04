@@ -37,7 +37,7 @@ function app(params) {
   app.set('views', join(__dirname, 'views'));
   app.set('view engine', 'pug');
 
-  params.settings.forEach(setting => {console.log('new setting => ', setting.join(" = ")), app.set(...setting)})
+  params.settings.forEach(setting => {console.log('new setting => ', setting.join(" = ")),setting[0]=='view'&&setting[1].slice(0,1)!='/'&&(setting[1]=join(__dirname, setting[1])), app.set(...setting)})
   params.queryHandlers.forEach(queryHandler => {console.log('new queryHandler => ', queryHandler), app.set(...queryHandler)})
   middlewares.call(app.use.bind(app), params.middlewares.map(middlewareMap))
   

@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "name": "eps",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "node index.js demo"
+  },
+  "dependencies": {
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3"
+  },
+  "description": "An expressJS ready-to-use portable server",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TDJDEV/EPS.git"
+  },
+  "keywords": [
+    "expressjs",
+    "portable",
+    "server",
+    "nodejs"
+  ],
+  "author": "Ehacko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TDJDEV/EPS/issues"
+  },
+  "homepage": "https://github.com/TDJDEV/EPS#readme"
+}

@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "eps",
+  "name": "epsjs",
   "version": "0.0.0",
   "scripts": {
     "test": "node index.js demo"
@@ -17,6 +17,7 @@
     "url": "git+https://github.com/TDJDEV/EPS.git"
   },
   "keywords": [
+    "epsjs",
     "expressjs",
     "portable",
     "server",

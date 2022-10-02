@@ -31,7 +31,7 @@ epsJS(Express Portable Server) is an ExpressJS-based tool for quickly building a
 ---
 ## Methods
 
-### On :
+### On
   - Error: Define a error handling middleware. 
     ```js
     server.on.error((err, req, res, next)=>{res.send('error')})

@@ -1,4 +1,4 @@
-const default_access = ['/',import.meta.url.replace('server/accesses/index.js','demo').slice(10)]
+const default_access = ['/',__dirname.replace('server\\accesses','demo')]
 function accesses(accesses, express){accesses.reduce(
     (app, access_data)=>{
         access_data == "demo"&&(access_data=default_access)
@@ -9,4 +9,4 @@ function accesses(accesses, express){accesses.reduce(
     },
     this
 )}
-export { accesses }
+module.exports = accesses

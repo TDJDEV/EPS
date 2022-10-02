@@ -1,13 +1,9 @@
-import createError from 'http-errors';
-
 function errorHandler(errorHandler) {
 
-  return [
-    function(req, res, next) {
-      next(createError(404));
-    },
-    errorHandler
-  ]
+  this.use(
+    function(req, res, next) {next(require('http-errors')(404));},
+    errorHandler.bind(this)
+  )
 }
 
-export { errorHandler}
+module.exports = errorHandler

@@ -1,24 +1,21 @@
 {
-  "type": "module",
   "name": "epsjs",
-  "version": "0.0.0",
-  "scripts": {
-    "test": "node index.js demo"
-  },
+  "version": "1.0.0",
   "dependencies": {
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3"
   },
-  "description": "An expressJS ready-to-use portable server",
+  "description": "An ExpressJS-based tool for quickly building a configurable nodeJS application server",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TDJDEV/EPS.git"
   },
   "keywords": [
-    "epsjs",
+    "EPS",
     "expressjs",
+    "express",
     "portable",
     "server",
     "nodejs"

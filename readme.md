@@ -23,8 +23,8 @@ epsJS(Express Portable Server) is an ExpressJS-based tool for quickly building a
 
   // one line
 
-  (new epsjs).add
-    .route({method: 'get',path: '/',callback(req,res,next){res.send('hello world')}})
+  (new epsjs)
+    .add.route({method: 'get',path: '/',callback(req,res,next){res.send('hello world')}})
     .run()
   ```
 

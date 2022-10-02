@@ -1,9 +1,8 @@
-import { www } from './www/index.js'
+const www = require('./www/index.js')
 
 class EPS {
   #serverData
   #plugin
-  #demo_data
   constructor(){
     this.#serverData = {
       accesses: [],
@@ -18,30 +17,48 @@ class EPS {
 
         // render the error page
         res.status(err.status || 500);
-        this.get('view engine')?res.render('error'):res.sendFile(import.meta.url.replace('index.js','views/error.html').slice(10));
+        this.get('view engine')?res.render('error'):res.sendFile(__dirname+'\\views\\error.html');
       },
     }
     this.#plugin={}
-    this.#demo_data=[{appName:"EPS",routes:['demo'],accesses:['demo'],settings:[],middlewares:[],queryHandlers:['demo'], errorHandler: this.#serverData.errorHandler},{}]
+    this.on = {
+      param: (...params)=>{
+        const addQueryHandler = (setting) => { setting.length && (this.#serverData.queryHandler.push(setting))}
+        Array.isArray(params[0]) ? params.forEach(addQueryHandler) : addQueryHandler(params);
+        return this
+      },
+      error: (callback)=>{
+        callback instanceof Function ? this.#serverData.errorHandler = callback : console.error(callback,' is not a function')
+        return this
+      }
+    }
+    this.add = {
+      dir:        (...accesses)         => {
+        const addAccess = (access) => { access.length === 1 && access.unshift('/'), access.length && (this.#serverData.accesses.push(access)) }
+        Array.isArray(accesses[0]) ? accesses.forEach(addAccess) : addAccess(accesses);
+        return this
+      },
+      middleware: (...middlewares_data) => {
+        middlewares_data.forEach(middleware_data => middleware_data && this.#serverData.middlewares.push(middleware_data) );
+        return this
+      },
+      route:      (...routes_data)      => {
+        routes_data.forEach(route_data => route_data && this.#serverData.routes.push(route_data) )
+        return this
+      },
+      setting:    (...params)           => {
+        const addSetting = (setting) => { setting.length && (this.#serverData.settings.push(setting)) }
+        Array.isArray(params[0]) ? params.forEach(addSetting) : addSetting(params)
+        return this
+      },
+      webSocket:  (WS)                  => {
+        this.#plugin.webSocket = WS;
+        return this
+      },
+    }
+    this.run = (port=3000) => { Object.entries(www(this.#serverData, this.#plugin, port)).forEach( ([key,val]) => { this[key] = val }) }
   }
-
-  param (...params) {
-    const addQueryHandler = (setting) => { setting.length && (this.#serverData.queryHandler.push(setting))}
-    Array.isArray(params[0]) ? params.forEach(addQueryHandler) : addQueryHandler(params)
-  }
-  onError (callback) {
-    callback instanceof Function ? this.#serverData.errorHandler = callback : console.error(callback,' is not a function')
-  }
-  route (...routes_data) { routes_data.forEach(route_data => route_data && this.#serverData.routes.push(route_data) ) }
-  access (...accesses) { accesses.forEach(access_data => access_data && this.#serverData.accesses.push(access_data) ) }
-  use   (...middlewares_data) { middlewares_data.forEach(middleware_data => middleware_data && this.#serverData.middlewares.push(middleware_data) ) }
-  set   (...params) {
-    const addSettings = (setting) => { setting.length && (this.#serverData.settings.push(setting)) }
-    Array.isArray(params[0]) ? params.forEach(addSettings) : addSettings(params)
-  }
-  webSocket(WS){ this.#plugin.webSocket = WS }
-  run(port=3000) { Object.entries(www(this.#serverData, this.#plugin, port)).forEach( ([key,val]) => { this[key] = val }) }
-  demo(port=3000) { Object.entries(www(...this.#demo_data,port)) }
 
 }
-export { EPS }
+
+module.exports = EPS

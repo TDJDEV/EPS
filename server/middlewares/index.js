@@ -5,4 +5,4 @@ function middlewares(middlewares){middlewares.reduce(
     },
     this
 )}
-export { middlewares }
+module.exports = middlewares

@@ -1,18 +1,13 @@
 #!/usr/bin/env node
 
-/* Module dependencies. */
-import { app } from '../app.js';
-import debug from 'debug';
-import http from 'http';
-
 function www (params = {}, plugin, port_number) { return (app => {
     /* Get port from environment and store in Express. */
     const port = normalizePort(process.env.PORT || app.get('port') || port_number);
     app.set('port', port);
   
     /* Create HTTP server. */
-    const server = http.createServer(app);
-    plugin.webSocket && plugin[0].webSocket.attach(server)
+    const server = require('http').createServer(app);
+    plugin.webSocket && plugin.webSocket.attach(server)
   
     /* Listen on provided port, on all network interfaces. */
     server.listen(port);
@@ -46,10 +41,10 @@ function www (params = {}, plugin, port_number) { return (app => {
     function onListening() {
       const addr = server.address();
       const bind=typeof addr==='string'?'pipe '+addr:'port '+addr.port;
-      debug(`${process.env.npm_package_name}:server`)('Listening on ' + bind);
+      require('debug')(`${process.env.npm_package_name}:server`)('Listening on ' + bind);
     }
     
     return { port }
     
-  })(app(params))}
-export { www }
+  })(require('../app.js')(params))}
+  module.exports = www

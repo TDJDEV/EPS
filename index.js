@@ -1,5 +1,7 @@
 const www = require('./www/index.js')
-
+function toArray(x){
+  return Array.isArray(x) ? x : [x]
+}
 class EPS {
   #serverData
   #plugin
@@ -35,11 +37,11 @@ class EPS {
     this.add = {
       dir:        (...accesses)         => {
         const addAccess = (access) => { access.length === 1 && access.unshift('/'), access.length && (this.#serverData.accesses.push(access)) }
-        Array.isArray(accesses[0]) ? accesses.forEach(addAccess) : addAccess(accesses);
+        Array.isArray(accesses[0]) ? accesses.forEach( access => addAccess(toArray(access))) : addAccess(accesses);
         return this
       },
       middleware: (...middlewares_data) => {
-        middlewares_data.forEach(middleware_data => middleware_data && this.#serverData.middlewares.push(middleware_data) );
+        middlewares_data.forEach(middleware_data => middleware_data && this.#serverData.middlewares.push(toArray(middleware_data)) );
         return this
       },
       route:      (...routes_data)      => {

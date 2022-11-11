@@ -45,11 +45,24 @@ epsJS(Express Portable Server) is an ExpressJS-based tool for quickly building a
 ### Add
   - dir: Add a server static folder.
     ```js
-    server.add.route('/url/path/','folder/path')
+    server.add.dir('/url/path/','folder/path')
+    // or
+    server.add.dir(
+      ['/url/path/1/','folder1/path'],
+      ['/url/path/2/','folder2/path'],
+    )
     ```
   - middleware: Add a server route.
     ```js
+    // gblobal
     server.add.middleware((req,res;next) => { console.log("my middleware") })
+    // on specifique path
+    server.add.middleware('/url/path/',(req,res;next) => { console.log("my middleware") })
+    // multiple middleware
+    server.add.middleware(
+      (req,res;next) => { console.log("my first middleware") },
+      ['/url/path/',(req,res;next) => { console.log("my second middleware") }]
+    )
     ```
   - route: Add a server route.
     ```js
